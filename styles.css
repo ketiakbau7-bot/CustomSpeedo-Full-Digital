@@ -1,0 +1,275 @@
+* {
+    user-select: none;
+    user-drag: none;
+}
+:root {
+    --bg-color: #1a1a1a;
+    --display-bg: #101010;
+    --text-color: #e0e0e0;
+    --primary-color: #00ffff;
+    --accent-color: #ff4757;
+    --indicator-off: #444;
+    --indicator-on: #00ff00;
+    --headlight-on: #f7b731;
+    --highbeam-on: #3498db;
+    --seatbelt-off: #ff4757;
+    --engine-on: #f1c40f;
+    --font-digital: 'Orbitron', sans-serif;
+    --font-standard: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: transparent !important;
+    font-family: var(--font-standard);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+
+.dashboard-container {
+    position: fixed;
+    bottom: -10%;
+    right: -10%;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.418);
+    backdrop-filter: blur(1px);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 0.5fr 3fr 0.5fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem 2rem;
+    grid-template-areas:
+        "indicators-left speedometer indicators-right"
+        "rpm speedometer stats"
+        "gear speedometer stats";
+    overflow: hidden;
+    transform: scale(0.4);
+}
+
+.dashboard-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(MISIDE_3.png);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+
+
+.speedometer {
+    grid-area: speedometer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-left: 4px solid #4444448c;
+    border-right: 4px solid #4444448c;
+}
+
+.speed-display {
+    font-family: var(--font-digital);
+    font-size: clamp(4rem, 15vw, 10rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+
+.speed-unit {
+    font-family: var(--font-digital);
+    font-size: clamp(1rem, 4vw, 2rem);
+    color: #ffffff;
+}
+
+
+.rpm-gauge {
+    grid-area: rpm;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.rpm-label {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.rpm-bar-container {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 4px;
+    height: 200px;
+}
+
+.rpm-segment {
+    flex-grow: 1;
+    background-color: #333;
+    border-radius: 2px;
+    transition: background-color 0.1s;
+}
+
+.rpm-segment.active {
+    background-color: var(--primary-color);
+}
+
+.rpm-segment.danger {
+    background-color: var(--accent-color);
+}
+
+
+.gear-display {
+    grid-area: gear;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gear-value {
+    font-family: var(--font-digital);
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.gear-label {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+
+.indicators-left { grid-area: indicators-left; text-align: right; }
+.indicators-right { grid-area: indicators-right; text-align: left; }
+
+.indicator {
+    display: inline-block;
+    font-size: 2.5rem;
+    opacity: 0.2;
+    transition: opacity 0.3s, color 0.3s;
+}
+
+.indicator.blinking {
+    opacity: 1;
+    color: var(--indicator-on);
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.2; }
+}
+
+
+.stats {
+    grid-area: stats;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.stat-bar {
+    width: 100%;
+}
+
+.stat-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2em;
+    margin-bottom: 0.3rem;
+}
+
+.bar-background {
+    background-color: #333;
+    border-radius: 5px;
+    height: 12px;
+    overflow: hidden;
+}
+
+.bar-foreground {
+    height: 100%;
+    width: 0;
+    border-radius: 5px;
+    transition: width 0.5s ease-out;
+}
+
+#fuel-bar { background: linear-gradient(90deg, #f39c12, #f1c40f); }
+#health-bar { background: linear-gradient(90deg, #e74c3c, #2ecc71); }
+
+
+.icon-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.icon {
+    width: 75px;
+    height: 75px;
+    fill: var(--text-color);
+    stroke: #e0e0e0;
+    transition: fill 0.3s;
+}
+
+.icon.active {
+    fill: var(--text-color);
+}
+
+#headlights-icon.low-beam { fill: var(--headlight-on); }
+#headlights-icon.high-beam { fill: var(--highbeam-on); }
+#seatbelt-icon.active { fill: var(--seatbelt-off); stroke: var(--seatbelt-off); }
+#engine-icon.active { fill: var(--engine-on); stroke: var(--engine-on); }
+
+
+@media (max-width: 650px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1.5rem;
+        grid-template-areas:
+            "speedometer"
+            "indicators"
+            "rpm"
+            "stats"
+            "gear";
+        padding: 1rem;
+    }
+    .speedometer {
+        border: none;
+        padding: 0;
+    }
+    .indicators-left, .indicators-right {
+        grid-area: indicators;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .rpm-gauge {
+        align-items: center;
+    }
+    .rpm-bar-container {
+        flex-direction: row;
+        width: 100%;
+        height: 20px;
+    }
+    .rpm-segment {
+        flex-grow: 1;
+    }
+}
