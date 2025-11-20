@@ -125,24 +125,7 @@ function setRightIndicator(state) {
 }
 
 function handleIndicatorSound(active) {
-    if (active && !indicatorSoundInterval) {
-        indicatorSoundInterval = setInterval(() => {
-            if (leftIndicatorEl.classList.contains('blinking') || rightIndicatorEl.classList.contains('blinking')) {
-                indicatorSound.currentTime = 0;
-                indicatorSound.play().catch(() => {});
-            } else {
-                clearInterval(indicatorSoundInterval);
-                indicatorSoundInterval = null;
-            }
-        }, 600);
-    } else if (!active) {
-        if (indicatorSoundInterval) {
-            clearInterval(indicatorSoundInterval);
-            indicatorSoundInterval = null;
-        }
-        indicatorSound.pause();
-        indicatorSound.currentTime = 0;
-    }
+    return; // tidak melakukan apa-apa
 }
 
 function setSeatbelts(state) {
@@ -246,4 +229,5 @@ function initializeDashboard() {
 }
 
 window.onload = initializeDashboard;
+
 
