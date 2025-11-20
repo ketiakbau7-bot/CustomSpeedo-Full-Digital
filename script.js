@@ -5,6 +5,8 @@ const rpmContainerEl = document.getElementById('rpm-bar-container');
 const fuelBarEl = document.getElementById('fuel-bar');
 const healthBarEl = document.getElementById('health-bar');
 const gearValueEl = document.getElementById('gear-value');
+const fuelPercentEl = document.getElementById('fuel-percent');
+const healthPercentEl = document.getElementById('health-percent');
 const leftIndicatorEl = document.getElementById('left-indicator');
 const rightIndicatorEl = document.getElementById('right-indicator');
 const headlightsIconEl = document.getElementById('headlights-icon');
@@ -72,12 +74,22 @@ function setRPM(rpm) {
 
 function setFuel(fuel) {
     const percentage = Math.max(0, Math.min(100, fuel * 100));
+
+    // Update bar panjang
     fuelBarEl.style.width = `${percentage}%`;
+
+    // Update angka persen
+    fuelPercentEl.textContent = `${Math.round(percentage)}%`;
 }
 
 function setHealth(health) {
     const percentage = Math.max(0, Math.min(100, health * 100));
+
+    // Update bar
     healthBarEl.style.width = `${percentage}%`;
+
+    // Update angka
+    healthPercentEl.textContent = `${Math.round(percentage)}%`;
 }
 
 function setGear(gear) {
@@ -203,6 +215,25 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// ================== NUI Message Handler ==================
+window.addEventListener('message', (event) => {
+    const data = event.data;
+
+    if (data.speed !== undefined) setSpeed(data.speed);
+    if (data.rpm !== undefined) setRPM(data.rpm);
+    if (data.fuel !== undefined) setFuel(data.fuel);
+    if (data.health !== undefined) setHealth(data.health);
+    if (data.gear !== undefined) setGear(data.gear);
+
+    if (data.headlights !== undefined) setHeadlights(data.headlights);
+    if (data.leftIndicator !== undefined) setLeftIndicator(data.leftIndicator);
+    if (data.rightIndicator !== undefined) setRightIndicator(data.rightIndicator);
+    if (data.seatbelt !== undefined) setSeatbelts(data.seatbelt);
+    if (data.engine !== undefined) setEngine(data.engine);
+
+    if (data.alarmToggle !== undefined) toggleAlarm();
+});
+
 // ================== Init ==================
 function initializeDashboard() {
     rpmContainerEl.innerHTML = '';
@@ -215,3 +246,4 @@ function initializeDashboard() {
 }
 
 window.onload = initializeDashboard;
+
