@@ -273,5 +273,13 @@ body {
         flex-grow: 1;
     }
 }
+.stat-percent {
+    text-align: right;
+    font-size: 1.4em;
+    margin-top: 0.3rem;
+    color: var(--text-color);
+    opacity: 0.85;
+}
+
 
 
