@@ -285,11 +285,12 @@ body {
     position: absolute;
     bottom: 5px;   /* semakin kecil = semakin turun */
     left: 40%;   /* bisa ganti ke left jika mau kiri */
-    font-size: 1em;  /* perkecil ukuran */
+    font-size: 1.5em;  /* perkecil ukuran */
     opacity: 0.7;      /* lebih soft */
     color: var(--text-color);
     pointer-events: none; /* biar tidak bisa diklik */
 }
+
 
 
 
