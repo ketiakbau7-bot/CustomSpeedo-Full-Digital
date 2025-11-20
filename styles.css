@@ -79,7 +79,6 @@ body {
     text-align: center;
     border-left: 4px solid #4444448c;
     border-right: 4px solid #4444448c;
-    transform: translateX(30px);
 }
 
 .speed-display {
@@ -291,6 +290,7 @@ body {
     color: var(--text-color);
     pointer-events: none; /* biar tidak bisa diklik */
 }
+
 
 
 
