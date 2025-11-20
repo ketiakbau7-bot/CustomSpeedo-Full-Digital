@@ -1,4 +1,4 @@
-* {
+r* {
     user-select: none;
     user-drag: none;
 }
@@ -274,12 +274,13 @@ body {
     }
 }
 .stat-percent {
-    text-align: right;
+    text-align: center;
     font-size: 1.4em;
     margin-top: 0.3rem;
     color: var(--text-color);
     opacity: 0.85;
 }
+
 
 
 
