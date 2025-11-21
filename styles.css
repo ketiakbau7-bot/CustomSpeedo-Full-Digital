@@ -234,7 +234,7 @@ body {
 
 #headlights-icon.low-beam { fill: var(--headlight-on); }
 #headlights-icon.high-beam { fill: var(--highbeam-on); }
-#seatbelt-icon.active { fill: var(--seatbelt-off); stroke: var(--seatbelt-off); }
+#seatbelt-icon.active { fill: #19e619; stroke: #19e619; }
 #engine-icon.active { fill: var(--engine-on); stroke: var(--engine-on); }
 
 
@@ -290,6 +290,7 @@ body {
     color: var(--text-color);
     pointer-events: none; /* biar tidak bisa diklik */
 }
+
 
 
 
