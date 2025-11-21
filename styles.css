@@ -51,7 +51,7 @@ body {
         "rpm speedometer stats"
         "gear speedometer stats";
     overflow: hidden;
-    transform: scale(0.4) translateX(80px);  /* ← geser ke kanan */
+    transform: scale(0.4) translateX(120px);  /* ← geser ke kanan */
 }
 
 .dashboard-container::before {
@@ -290,6 +290,7 @@ body {
     color: var(--text-color);
     pointer-events: none; /* biar tidak bisa diklik */
 }
+
 
 
 
